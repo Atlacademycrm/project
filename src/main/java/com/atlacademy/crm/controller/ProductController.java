@@ -22,7 +22,7 @@ public class ProductController {
     }
     @PostMapping("/api/products")
     Product newProduct(@RequestBody Product product) {
-        return productService.saveProduct(product);
+        return productService.save(product);
     }
 
     @GetMapping("/api/product/{id}")
@@ -33,11 +33,11 @@ public class ProductController {
     @PutMapping("/api/product/{id}")
     Product updateProduct(@PathVariable Long id) {
         Product product = productService.getById(id);
-        return productService.saveProduct(product);
+        return productService.save(product);
     }
 
     @DeleteMapping("/api/product/{id}")
     void deleteProduct(@PathVariable Long id) {
-        productService.deleteProductById(id);
+        productService.deleteById(id);
     }
 }

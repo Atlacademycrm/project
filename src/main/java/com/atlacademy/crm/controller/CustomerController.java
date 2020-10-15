@@ -23,7 +23,7 @@ public class CustomerController {
 
     @PostMapping("/api/customers")
     Customer newCustomer(@RequestBody Customer customer) {
-        return customerService.saveCustomer(customer);
+        return customerService.save(customer);
     }
 
     @GetMapping("/api/customer/{id}")
@@ -34,11 +34,11 @@ public class CustomerController {
     @PutMapping("/api/customer/{id}")
     Customer updateCustomer(@PathVariable Long id) {
         Customer customer = customerService.getById(id);
-        return customerService.saveCustomer(customer);
+        return customerService.save(customer);
     }
 
     @DeleteMapping("/api/customer/{id}")
     void deleteCustomer(@PathVariable Long id) {
-        customerService.deleteCustomerById(id);
+        customerService.deleteById(id);
     }
 }

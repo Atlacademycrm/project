@@ -21,7 +21,7 @@ public class TicketController {
     }
     @PostMapping("/api/tickets")
     Ticket newTicket(@RequestBody Ticket Ticket) {
-        return ticketService.saveTicket(Ticket);
+        return ticketService.save(Ticket);
     }
 
     @GetMapping("/api/ticket/{id}")
@@ -32,11 +32,11 @@ public class TicketController {
     @PutMapping("/api/ticket/{id}")
     Ticket updateTicket(@PathVariable Long id) {
         Ticket ticket = ticketService.getById(id);
-        return ticketService.saveTicket(ticket);
+        return ticketService.save(ticket);
     }
 
     @DeleteMapping("/api/ticket/{id}")
     void deleteTicket(@PathVariable Long id) {
-        ticketService.deleteTicketById(id);
+        ticketService.deleteById(id);
     }
 }
