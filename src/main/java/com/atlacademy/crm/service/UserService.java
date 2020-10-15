@@ -21,11 +21,11 @@ public class UserService {
         return userRepository.getOne(id);
     }
 
-    public User saveUser(User User) {
+    public User save(User User) {
         return userRepository.save(User);
     }
 
-    public void deleteUserById(Long id) {
+    public void deleteById(Long id) {
         userRepository.delete(getById(id));
     }
 }

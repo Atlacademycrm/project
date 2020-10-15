@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class TicketService {
-TicketRepository ticketRepository;
+    TicketRepository ticketRepository;
 
     public TicketService(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
@@ -21,11 +21,11 @@ TicketRepository ticketRepository;
         return ticketRepository.getOne(id);
     }
 
-    public Ticket saveTicket(Ticket ticket) {
+    public Ticket save(Ticket ticket) {
         return ticketRepository.save(ticket);
     }
 
-    public void deleteTicketById(Long id) {
+    public void deleteById(Long id) {
         ticketRepository.delete(getById(id));
     }
 }

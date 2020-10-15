@@ -22,11 +22,11 @@ public class ReportService {
         return reportRepository.getOne(id);
     }
 
-    public Report saveReport(Report report) {
+    public Report save(Report report) {
         return reportRepository.save(report);
     }
 
-    public void deleteReportById(Long id) {
+    public void deleteById(Long id) {
         reportRepository.delete(getById(id));
     }
 }

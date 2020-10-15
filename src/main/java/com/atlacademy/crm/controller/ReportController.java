@@ -21,7 +21,7 @@ public class ReportController {
     }
     @PostMapping("/api/reports")
     Report newReport(@RequestBody Report report) {
-        return reportService.saveReport(report);
+        return reportService.save(report);
     }
 
     @GetMapping("/api/report/{id}")
@@ -32,11 +32,11 @@ public class ReportController {
     @PutMapping("/api/report/{id}")
     Report updateReport(@PathVariable Long id) {
         Report report = reportService.getById(id);
-        return reportService.saveReport(report);
+        return reportService.save(report);
     }
 
     @DeleteMapping("/api/report/{id}")
     void deleteReport(@PathVariable Long id) {
-        reportService.deleteReportById(id);
+        reportService.deleteById(id);
     }
 }
