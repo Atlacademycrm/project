@@ -9,6 +9,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@RequestMapping("/api")
 public class CustomerController {
     private CustomerService customerService;
 
@@ -16,28 +17,29 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/api/customers")
+    @GetMapping("/customers")
     List<Customer> customers() {
         return customerService.findAll();
     }
 
-    @PostMapping("/api/customers")
+    @PostMapping("/customers")
     Customer newCustomer(@RequestBody Customer customer) {
+        System.out.println(customer);
         return customerService.save(customer);
     }
 
-    @GetMapping("/api/customer/{id}")
+    @GetMapping("/customer/{id}")
     Customer singleCustomer(@PathVariable Long id) {
         return customerService.getById(id);
     }
 
-    @PutMapping("/api/customer/{id}")
+    @PutMapping("/customer/{id}")
     Customer updateCustomer(@PathVariable Long id) {
         Customer customer = customerService.getById(id);
         return customerService.save(customer);
     }
 
-    @DeleteMapping("/api/customer/{id}")
+    @DeleteMapping("/customer/{id}")
     void deleteCustomer(@PathVariable Long id) {
         customerService.deleteById(id);
     }

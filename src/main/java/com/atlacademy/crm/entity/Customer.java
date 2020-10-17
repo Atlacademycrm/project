@@ -33,9 +33,15 @@ public class Customer {
     private String email;
 
     @Column(name = "preferred_communication")
+    @Enumerated(EnumType.STRING)
     private CommunicationType preferredCommunication;
+
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.EAGER)
     @ToString.Exclude
-    private List<Ticket> tickets=new ArrayList<>();
+    private List<Ticket> tickets = new ArrayList<>();
+
+    public void setPreferredCommunication(String status) {
+        this.preferredCommunication = CommunicationType.valueOf(status);
+    }
 }

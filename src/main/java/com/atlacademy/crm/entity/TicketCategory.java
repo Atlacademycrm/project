@@ -19,9 +19,9 @@ public class TicketCategory {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     @ToString.Exclude
-    private List <Ticket> tickets=new ArrayList<>();
+    private List <Ticket> tickets = new ArrayList<>();
 
 
 }
