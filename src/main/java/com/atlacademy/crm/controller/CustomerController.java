@@ -9,7 +9,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value = "/api")
 public class CustomerController {
     private CustomerService customerService;
 
@@ -25,6 +25,7 @@ public class CustomerController {
     @PostMapping("/customers")
     Customer newCustomer(@RequestBody Customer customer) {
         System.out.println(customer);
+        log.info(String.valueOf(customer));
         return customerService.save(customer);
     }
 

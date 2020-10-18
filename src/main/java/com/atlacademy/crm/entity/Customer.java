@@ -1,8 +1,11 @@
 package com.atlacademy.crm.entity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +30,9 @@ public class Customer {
     private String phoneNumber;
 
     @Column(name="birthdate")
-    private Date birthDate;
+    @JsonDeserialize(using=LocalDateDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate birthDate;
 
     @Column(name = "email")
     private String email;
@@ -41,7 +46,4 @@ public class Customer {
     @ToString.Exclude
     private List<Ticket> tickets = new ArrayList<>();
 
-    public void setPreferredCommunication(String status) {
-        this.preferredCommunication = CommunicationType.valueOf(status);
-    }
 }

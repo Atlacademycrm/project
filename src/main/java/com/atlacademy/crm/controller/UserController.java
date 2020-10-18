@@ -17,27 +17,27 @@ private UserService userService;
         this.userService = userService;
     }
 
-    @GetMapping("/api/users")
+    @GetMapping("/users")
     List<User> users() {
         return userService.findAll();
     }
-    @PostMapping("/api/users")
+    @PostMapping("/users")
     User newUser(@RequestBody User user) {
         return userService.save(user);
     }
 
-    @GetMapping("/api/user/{id}")
+    @GetMapping("/user/{id}")
     User singleUser(@PathVariable Long id) {
         return userService.getById(id);
     }
 
-    @PutMapping("/api/user/{id}")
+    @PutMapping("/user/{id}")
     User updateUser(@PathVariable Long id) {
         User user = userService.getById(id);
         return userService.save(user);
     }
 
-    @DeleteMapping("/api/user/{id}")
+    @DeleteMapping("/user/{id}")
     void deleteUser(@PathVariable Long id) {
         userService.deleteById(id);
     }

@@ -16,27 +16,27 @@ public class ReportController {
     public ReportController(ReportService reportService) {
         this.reportService = reportService;
     }
-    @GetMapping("/api/reports")
+    @GetMapping("/reports")
     List<Report> reports() {
         return reportService.findAll();
     }
-    @PostMapping("/api/reports")
+    @PostMapping("/reports")
     Report newReport(@RequestBody Report report) {
         return reportService.save(report);
     }
 
-    @GetMapping("/api/report/{id}")
+    @GetMapping("/report/{id}")
     Report singleReport(@PathVariable Long id) {
         return reportService.getById(id);
     }
 
-    @PutMapping("/api/report/{id}")
+    @PutMapping("/report/{id}")
     Report updateReport(@PathVariable Long id) {
         Report report = reportService.getById(id);
         return reportService.save(report);
     }
 
-    @DeleteMapping("/api/report/{id}")
+    @DeleteMapping("/report/{id}")
     void deleteReport(@PathVariable Long id) {
         reportService.deleteById(id);
     }
