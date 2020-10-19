@@ -1,7 +1,6 @@
 package com.atlacademy.crm.controller;
 
 import com.atlacademy.crm.entity.Ticket;
-import com.atlacademy.crm.entity.TicketCategory;
 import com.atlacademy.crm.service.TicketService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +20,7 @@ public class TicketController {
     List<Ticket> tickets() {
         return ticketService.findAll();
     }
+
     @PostMapping("/tickets")
     Ticket newTicket(@RequestBody Ticket Ticket) {
         return ticketService.save(Ticket);

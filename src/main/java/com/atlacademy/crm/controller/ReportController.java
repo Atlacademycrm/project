@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -16,10 +17,12 @@ public class ReportController {
     public ReportController(ReportService reportService) {
         this.reportService = reportService;
     }
+
     @GetMapping("/reports")
     List<Report> reports() {
         return reportService.findAll();
     }
+
     @PostMapping("/reports")
     Report newReport(@RequestBody Report report) {
         return reportService.save(report);
@@ -31,8 +34,8 @@ public class ReportController {
     }
 
     @PutMapping("/report/{id}")
-    Report updateReport(@PathVariable Long id) {
-        Report report = reportService.getById(id);
+    Report updateReport(@PathVariable Long id, @RequestBody Report report) {
+        report = reportService.getById(id);
         return reportService.save(report);
     }
 

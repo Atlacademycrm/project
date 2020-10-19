@@ -1,17 +1,20 @@
 package com.atlacademy.crm.entity;
 
+
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tickets")
 @Data
-public class Ticket {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+public class Ticket implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -21,14 +24,11 @@ public class Ticket {
     private String header;
 
     @Column(name = "priority_degree")
+    @Enumerated(EnumType.ORDINAL)
     private PriorityDegree priorityDegree;
 
     @Column(name = "status")
     private String status;
-
-    @ManyToOne
-    @ToString.Exclude
-    private TicketCategory category;
 
     @Column(name = "description")
     private String description;
@@ -41,11 +41,15 @@ public class Ticket {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private TicketCategory category;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @ToString.Exclude
     private User createdBy;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @ToString.Exclude
     private Customer customer;
 }

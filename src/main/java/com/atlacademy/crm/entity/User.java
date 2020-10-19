@@ -1,5 +1,6 @@
 package com.atlacademy.crm.entity;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.ToString;
 
@@ -10,7 +11,9 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Data
-public class User {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+public class User implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +32,7 @@ public class User {
     @Column(name = "password")
     private char[] password;
 
-    @OneToMany(mappedBy = "createdBy",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @ToString.Exclude
-    private List<Ticket> createdTickets=new ArrayList<>();
+    private List<Ticket> createdTickets = new ArrayList<>();
 }
