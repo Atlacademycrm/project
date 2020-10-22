@@ -38,9 +38,8 @@ public class Customer implements java.io.Serializable {
     private String email;
 
     @Column(name = "preferred_communication")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private CommunicationType preferredCommunication;
-
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @ToString.Exclude

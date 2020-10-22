@@ -29,4 +29,10 @@ public class CustomerService {
     public void deleteById(Long id) {
         customerRepository.delete(getById(id));
     }
+
+    public Customer updateById(Long id, Customer customer) {
+        customerRepository.getOne(id);
+        customer.setId(id);
+        return customerRepository.save(customer);
+    }
 }

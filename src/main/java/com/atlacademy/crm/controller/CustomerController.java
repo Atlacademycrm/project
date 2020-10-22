@@ -1,15 +1,15 @@
 package com.atlacademy.crm.controller;
 
 import com.atlacademy.crm.entity.Customer;
+import com.atlacademy.crm.response.BaseResponse;
 import com.atlacademy.crm.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/customers")
 public class CustomerController {
     private CustomerService customerService;
 
@@ -17,30 +17,30 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/customers")
-    List<Customer> customers() {
-        return customerService.findAll();
+    @GetMapping
+    BaseResponse customers() {
+        return new BaseResponse(customerService.findAll());
     }
 
-    @PostMapping("/customers")
-    Customer newCustomer(@RequestBody Customer customer) {
-        System.out.println(customer);
-        log.info(String.valueOf(customer));
-        return customerService.save(customer);
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    BaseResponse newCustomer(@RequestBody Customer customer) {
+        log.info(customer.toString());
+        return new BaseResponse(customerService.save(customer));
     }
 
-    @GetMapping("/customer/{id}")
-    Customer singleCustomer(@PathVariable Long id) {
-        return customerService.getById(id);
+    @GetMapping("/{id}")
+    BaseResponse singleCustomer(@PathVariable Long id) {
+        return new BaseResponse(customerService.getById(id));
     }
 
-    @PutMapping("/customer/{id}")
-    Customer updateCustomer(@PathVariable Long id) {
-        Customer customer = customerService.getById(id);
-        return customerService.save(customer);
+    @PutMapping("/{id}")
+    BaseResponse updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
+        return new BaseResponse(customerService.updateById(id, customer));
     }
 
-    @DeleteMapping("/customer/{id}")
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteCustomer(@PathVariable Long id) {
         customerService.deleteById(id);
     }
