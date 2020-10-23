@@ -29,4 +29,10 @@ public class TicketCategoryService {
     public void deleteById(Long id) {
         ticketCategoryRepository.delete(getById(id));
     }
+
+    public TicketCategory updateById(Long id, TicketCategory ticketCategory) {
+        ticketCategoryRepository.getOne(id);
+        ticketCategory.setId(id);
+        return ticketCategoryRepository.save(ticketCategory);
+    }
 }

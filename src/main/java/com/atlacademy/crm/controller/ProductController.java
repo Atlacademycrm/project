@@ -1,15 +1,16 @@
 package com.atlacademy.crm.controller;
 
 import com.atlacademy.crm.entity.Product;
+import com.atlacademy.crm.response.BaseResponse;
 import com.atlacademy.crm.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/products")
 public class ProductController {
     private ProductService productService;
 
@@ -17,27 +18,30 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/products")
-    List<Product> products() {
-        return productService.findAll();
-    }
-    @PostMapping("/products")
-    Product newProduct(@RequestBody Product product) {
-        return productService.save(product);
+    @GetMapping
+    BaseResponse products() {
+        return new BaseResponse(productService.findAll());
     }
 
-    @GetMapping("/product/{id}")
-    Product singleProduct(@PathVariable Long id) {
-        return productService.getById(id);
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    BaseResponse newProduct(@RequestBody Product product) {
+        log.info(product.toString());
+        return new BaseResponse(productService.save(product));
     }
 
-    @PutMapping("/product/{id}")
-    Product updateProduct(@PathVariable Long id) {
-        Product product = productService.getById(id);
-        return productService.save(product);
+    @GetMapping("/{id}")
+    BaseResponse singleProduct(@PathVariable Long id) {
+        return new BaseResponse(productService.getById(id));
     }
 
-    @DeleteMapping("/product/{id}")
+    @PutMapping("/{id}")
+    BaseResponse updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        return new BaseResponse(productService.updateById(id, product));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteProduct(@PathVariable Long id) {
         productService.deleteById(id);
     }

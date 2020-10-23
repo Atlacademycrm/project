@@ -22,9 +22,10 @@ public class Report implements java.io.Serializable {
     private long id;
 
     @Column(name = "based_on")
-    private String basedOn;
+    @Enumerated(EnumType.STRING)
+    private BasedOn basedOn;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at",nullable = false,updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 

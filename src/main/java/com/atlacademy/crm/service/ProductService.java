@@ -29,4 +29,10 @@ public class ProductService {
     public void deleteById(Long id) {
         productRepository.delete(getById(id));
     }
+
+    public Product updateById(Long id, Product product) {
+        productRepository.getOne(id);
+        product.setId(id);
+        return productRepository.save(product);
+    }
 }

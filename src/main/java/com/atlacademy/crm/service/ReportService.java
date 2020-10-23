@@ -30,4 +30,10 @@ public class ReportService {
     public void deleteById(Long id) {
         reportRepository.delete(getById(id));
     }
+
+    public Report updateById(Long id, Report report) {
+        reportRepository.getOne(id);
+        report.setId(id);
+        return reportRepository.save(report);
+    }
 }

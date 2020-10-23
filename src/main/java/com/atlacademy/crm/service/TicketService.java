@@ -13,6 +13,7 @@ public class TicketService {
     public TicketService(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
     }
+
     public List<Ticket> findAll() {
         return ticketRepository.findAll();
     }
@@ -27,5 +28,11 @@ public class TicketService {
 
     public void deleteById(Long id) {
         ticketRepository.delete(getById(id));
+    }
+
+    public Ticket updateById(Long id, Ticket ticket) {
+        ticketRepository.getOne(id);
+        ticket.setId(id);
+        return ticketRepository.save(ticket);
     }
 }

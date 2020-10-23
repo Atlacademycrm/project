@@ -1,16 +1,16 @@
 package com.atlacademy.crm.controller;
 
 import com.atlacademy.crm.entity.Report;
+import com.atlacademy.crm.response.BaseResponse;
 import com.atlacademy.crm.service.ReportService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/reports")
 public class ReportController {
     private ReportService reportService;
 
@@ -18,28 +18,30 @@ public class ReportController {
         this.reportService = reportService;
     }
 
-    @GetMapping("/reports")
-    List<Report> reports() {
-        return reportService.findAll();
+    @GetMapping
+    BaseResponse reports() {
+        return new BaseResponse(reportService.findAll());
     }
 
-    @PostMapping("/reports")
-    Report newReport(@RequestBody Report report) {
-        return reportService.save(report);
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    BaseResponse newReport(@RequestBody Report report) {
+        log.info(report.toString());
+        return new BaseResponse(reportService.save(report));
     }
 
-    @GetMapping("/report/{id}")
-    Report singleReport(@PathVariable Long id) {
-        return reportService.getById(id);
+    @GetMapping("/{id}")
+    BaseResponse singleReport(@PathVariable Long id) {
+        return new BaseResponse(reportService.getById(id));
     }
 
-    @PutMapping("/report/{id}")
-    Report updateReport(@PathVariable Long id, @RequestBody Report report) {
-        report = reportService.getById(id);
-        return reportService.save(report);
+    @PutMapping("/{id}")
+    BaseResponse updateReport(@PathVariable Long id, @RequestBody Report report) {
+        return new BaseResponse(reportService.updateById(id, report));
     }
 
-    @DeleteMapping("/report/{id}")
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteReport(@PathVariable Long id) {
         reportService.deleteById(id);
     }
