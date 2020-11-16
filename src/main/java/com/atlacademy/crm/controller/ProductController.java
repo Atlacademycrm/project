@@ -45,4 +45,9 @@ public class ProductController {
     void deleteProduct(@PathVariable Long id) {
         productService.deleteById(id);
     }
+
+    @GetMapping("/size")
+    BaseResponse productSize() {
+        return new BaseResponse(productService.getProductsCount());
+    }
 }

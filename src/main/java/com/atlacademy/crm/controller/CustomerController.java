@@ -44,4 +44,9 @@ public class CustomerController {
     void deleteCustomer(@PathVariable Long id) {
         customerService.deleteById(id);
     }
+
+    @GetMapping("/size")
+    BaseResponse customerSize() {
+        return new BaseResponse(customerService.getCustomersCount());
+    }
 }
