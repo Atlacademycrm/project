@@ -41,4 +41,8 @@ public class CustomerService {
 
         return customers.stream().findFirst().orElseThrow();
     }
+
+    public long getCustomersCount() {
+        return customerRepository.count();
+    }
 }

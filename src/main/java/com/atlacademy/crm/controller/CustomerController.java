@@ -58,4 +58,9 @@ public class CustomerController {
             return new BaseResponse(203, "Phone number not found!");
         }
     }
+
+    @GetMapping("/size")
+    BaseResponse customerSize() {
+        return new BaseResponse(customerService.getCustomersCount());
+    }
 }

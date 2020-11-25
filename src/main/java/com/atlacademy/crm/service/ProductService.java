@@ -35,4 +35,7 @@ public class ProductService {
         product.setId(id);
         return productRepository.save(product);
     }
+    public long getProductsCount(){
+        return productRepository.count();
+    }
 }
