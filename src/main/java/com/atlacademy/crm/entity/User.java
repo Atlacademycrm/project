@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
-public class User implements java.io.Serializable {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +30,9 @@ public class User implements java.io.Serializable {
     private String username;
 
     @Column(name = "password")
-    private char[] password;
+    private char password;
 
-    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    /*@OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @ToString.Exclude
-    private List<Ticket> createdTickets = new ArrayList<>();
+    private List<Ticket> createdTickets = new ArrayList<>();*/
 }

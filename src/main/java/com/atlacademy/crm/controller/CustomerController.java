@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/api/customers")
 public class CustomerController {
     private CustomerService customerService;
@@ -18,30 +19,43 @@ public class CustomerController {
     }
 
     @GetMapping
-    BaseResponse customers() {
+    public BaseResponse customers() {
         return new BaseResponse(customerService.findAll());
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    BaseResponse newCustomer(@RequestBody Customer customer) {
+    public BaseResponse newCustomer(@RequestBody Customer customer) {
         log.info(customer.toString());
         return new BaseResponse(customerService.save(customer));
     }
 
     @GetMapping("/{id}")
-    BaseResponse singleCustomer(@PathVariable Long id) {
+    public BaseResponse singleCustomer(@PathVariable Long id) {
         return new BaseResponse(customerService.getById(id));
     }
 
     @PutMapping("/{id}")
-    BaseResponse updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
+    public BaseResponse updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
         return new BaseResponse(customerService.updateById(id, customer));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteCustomer(@PathVariable Long id) {
+    public void deleteCustomer(@PathVariable Long id) {
         customerService.deleteById(id);
+    }
+
+    @GetMapping("/check")
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse checkCustomer(@RequestParam String phoneNumber) {
+        log.info(phoneNumber);
+        Customer customer;
+        try {
+            customer = customerService.searchByPhoneNumber(phoneNumber);
+            return new BaseResponse(customer);
+        } catch (Exception exception) {
+            return new BaseResponse(203, "Phone number not found!");
+        }
     }
 }

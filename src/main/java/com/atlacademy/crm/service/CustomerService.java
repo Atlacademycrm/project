@@ -35,4 +35,10 @@ public class CustomerService {
         customer.setId(id);
         return customerRepository.save(customer);
     }
+
+    public Customer searchByPhoneNumber(String phoneNumber) {
+        List<Customer> customers = customerRepository.findCustomerByPhoneNumber(phoneNumber);
+
+        return customers.stream().findFirst().orElseThrow();
+    }
 }
