@@ -46,6 +46,7 @@ public class Ticket implements java.io.Serializable {
     private TicketCategory category;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @ToString.Exclude
     private Product product;
 
     @ManyToOne(cascade = CascadeType.ALL)
