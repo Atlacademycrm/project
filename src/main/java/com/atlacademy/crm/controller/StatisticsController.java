@@ -24,14 +24,14 @@ public class StatisticsController {
         this.productService = productService;
     }
 
-    @GetMapping(name = "customer_count")
+    @GetMapping("/customer_count")
     public BaseResponse customerCount() {
         HashMap<String, Long> count = new HashMap<>();
         count.put("count", customerService.getCustomersCount());
         return new BaseResponse(count);
     }
 
-    @GetMapping(name = "product_count")
+    @GetMapping("/product_count")
     public BaseResponse productCount() {
         HashMap<String, Long> count = new HashMap<>();
         count.put("count", productService.getProductsCount());
