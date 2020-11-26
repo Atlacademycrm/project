@@ -35,4 +35,8 @@ public class TicketService {
         ticket.setId(id);
         return ticketRepository.save(ticket);
     }
+
+    public List<Ticket> customerTickets(long customerId) {
+        return this.ticketRepository.getByCustomerId(customerId);
+    }
 }

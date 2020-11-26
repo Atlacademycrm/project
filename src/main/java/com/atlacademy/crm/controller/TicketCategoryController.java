@@ -7,8 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-
 @Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/api/categories")
 public class TicketCategoryController {
@@ -27,7 +27,7 @@ public class TicketCategoryController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     BaseResponse newTicketCategory(@RequestBody TicketCategory ticketCategory) {
-        log.info(ticketCategory.toString());
+        //log.info(ticketCategory.toString());
         return new BaseResponse(ticketCategoryService.save(ticketCategory));
     }
 

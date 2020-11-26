@@ -42,12 +42,9 @@ public class Ticket implements java.io.Serializable {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @Column(name = "category_id")
     @ManyToOne(cascade = CascadeType.ALL)
-    @ToString.Exclude
     private TicketCategory category;
 
-    @Column(name = "product_id")
     @ManyToOne(cascade = CascadeType.ALL)
     private Product product;
 

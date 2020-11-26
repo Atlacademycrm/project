@@ -1,10 +1,8 @@
 package com.atlacademy.crm.service;
 
 import com.atlacademy.crm.entity.User;
-import com.atlacademy.crm.entity.User;
 import com.atlacademy.crm.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

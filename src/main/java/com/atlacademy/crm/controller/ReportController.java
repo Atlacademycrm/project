@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/api/reports")
 public class ReportController {

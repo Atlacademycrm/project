@@ -3,19 +3,22 @@ package com.atlacademy.crm.controller;
 import com.atlacademy.crm.entity.Customer;
 import com.atlacademy.crm.response.BaseResponse;
 import com.atlacademy.crm.service.CustomerService;
+import com.atlacademy.crm.service.TicketService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@RestController
 @CrossOrigin
+@RestController
 @RequestMapping(value = "/api/customers")
 public class CustomerController {
     private CustomerService customerService;
+    private TicketService ticketService;
 
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(CustomerService customerService, TicketService ticketService) {
         this.customerService = customerService;
+        this.ticketService = ticketService;
     }
 
     @GetMapping
@@ -60,7 +63,12 @@ public class CustomerController {
     }
 
     @GetMapping("/size")
-    BaseResponse customerSize() {
+    public BaseResponse customerSize() {
         return new BaseResponse(customerService.getCustomersCount());
+    }
+
+    @GetMapping("/{id}/tickets")
+    public BaseResponse customerTickets(@PathVariable long id) {
+        return new BaseResponse(ticketService.customerTickets(id));
     }
 }
